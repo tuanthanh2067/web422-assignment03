@@ -70,7 +70,9 @@ function App() {
               <Route path="/about" render={() => <About />} />
               <Route
                 path="/restaurants"
-                render={() => <Restaurants query={searchString} />}
+                render={(props) => (
+                  <Restaurants query={props.location.search} />
+                )}
               />
               <Route
                 path="/restaurant/:id"
