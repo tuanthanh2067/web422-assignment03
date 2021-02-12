@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import L from "leaflet";
 import { Card, CardDeck } from "react-bootstrap";
+import Moment from "react-moment";
 
 import marker from "leaflet/dist/images/marker-icon.png";
 import shadow from "leaflet/dist/images/marker-shadow.png";
@@ -22,7 +23,10 @@ const Restaurant = ({ id }) => {
         <Card key={i}>
           <Card.Header as="h5">Grade: {restaurant.grades[i].grade}</Card.Header>
           <Card.Body>
-            <Card.Text>Completed: {restaurant.grades[i].date}</Card.Text>
+            <Card.Text>
+              Completed:{" "}
+              <Moment date={restaurant.grades[i].date} format="YYYY/MM/DD" />
+            </Card.Text>
           </Card.Body>
         </Card>
       );
@@ -51,7 +55,7 @@ const Restaurant = ({ id }) => {
 
   return (
     <>
-      {restaurant && (
+      {restaurant && !loading ? (
         <>
           <Card bg="light" className="mb-4">
             <Card.Body>
@@ -81,8 +85,14 @@ const Restaurant = ({ id }) => {
 
           <h3 className="my-4 pb-2 border-bottom">Ratings</h3>
 
-          <CardDeck>{grades}</CardDeck>
+          <CardDeck className="mb-4">{grades}</CardDeck>
         </>
+      ) : (
+        <Card bg="light" className="mt-4">
+          <Card.Body>
+            <Card.Text>Unable to find Restaurant with id: {id}</Card.Text>
+          </Card.Body>
+        </Card>
       )}
     </>
   );

@@ -77,11 +77,13 @@ const Restaurants = (props) => {
         </Card>
       )}
 
-      <Pagination className="mt-4">
-        <Pagination.Prev onClick={previousPage} />
-        <Pagination.Item>{page}</Pagination.Item>
-        <Pagination.Next onClick={nextPage} />
-      </Pagination>
+      {restaurants !== null && restaurants.length > 0 && (
+        <Pagination className="mt-4">
+          <Pagination.Prev onClick={previousPage} />
+          <Pagination.Item>{page}</Pagination.Item>
+          <Pagination.Next onClick={nextPage} />
+        </Pagination>
+      )}
     </>
   );
 };
